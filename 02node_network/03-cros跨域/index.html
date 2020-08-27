@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="/_axios@0.19.2@axios/dist/axios.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qs/6.9.4/qs.js"></script>
+    <div>cros跨域请求</div>
+    <script>
+        axios.defaults.baseURL = 'http://127.0.8.1:3003';
+        axios.interceptors.request.use(function(config){
+            console.log(config);
+            let data = config.data;
+            data =  Qs.stringify(data);
+            config.data = data;
+            return config
+        },function(error){
+            return Promise.reject(error);
+        })
+        axios.post('/login',{
+            username: 'wcw',
+            password: 123456
+        },{
+            headers:{
+                'X-Token':'22314qweqwq'
+            }
+        },{
+            withCredentials: true})
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    </script>
+</body>
+
+</html>

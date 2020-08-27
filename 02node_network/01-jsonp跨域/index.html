@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="/_axios@0.19.2@axios/dist/axios.js"></script>
+    <div>jspon跨域请求</div>
+    <script>
+        axios.jspon = (url) => {
+            return new Promise((resolve, reject) => {
+                window.jsponCallBack = function (result) {
+                    return resolve(result);
+                }
+                let JSONP = document.createElement('script');
+                JSONP.type = "text/javascript";
+                JSONP.src = `${url}?cb=jsponCallBack`;
+                console.log(JSONP);
+                document.querySelector('head').appendChild(JSONP);
+                setTimeout(() => {
+                    document.querySelector('head').removeChild(JSONP);
+                }, 1000);
+            })
+        }
+        axios.jspon('http://127.0.0.1:3000/user').then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    </script>
+</body>
+
+</html>

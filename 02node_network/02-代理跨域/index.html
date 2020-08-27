@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="/_axios@0.19.2@axios/dist/axios.js"></script>
+    <div>代理跨域请求</div>
+    <script>
+        axios.defaults.baseURL = 'http://localhost:8080';
+        axios.get('/user').then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    </script>
+</body>
+
+</html>
